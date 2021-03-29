@@ -23,17 +23,17 @@ export default {
     },
     methods: {
         goFind() {
-            console.log(this.$props.search)
+            // console.log(this.$props.search)
             const data = {
                     search: this.$props.search
                 }
             const query = querystring.stringify(data)
             const x = query.slice(7);
-            console.log(x);
+            // console.log(x);
             axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${x}`)
                 .then((res) => {
                     this.articles = res.data.results.slice(0,4);
-                    console.log(this.articles)
+                    // console.log(this.articles)
                 })
                 .catch((err) => console.log(err))
         }
@@ -52,8 +52,11 @@ export default {
             console.log(`https://api.mercadolibre.com/sites/MLA/search?q=${x}`);
             axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${x}`)
                 .then((res) => {
+                    // console.log('-- RES.DATA --');
+                    // console.log(res.data);
                     this.articles = res.data.results.slice(0,4);
-                    console.log(this.articles)
+                    // console.log('-- THIS.ARTICLES --');
+                    // console.log(this.articles)
                 })
                 .catch((err) => console.log(err))
         },
@@ -63,14 +66,9 @@ export default {
 
 <style lang="scss">
     .list-container{
-        width: 80%;
+        width: 75%;
         margin: 0px auto;
         padding: 5px;
         background-color: #fff;
-
-        // .item-container {
-        //     background-color: #fff ;
-        //     display: flex;
-        // }
     }
 </style>

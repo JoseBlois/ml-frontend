@@ -2,7 +2,9 @@
     <div class="form-container">
         <form @submit="Submit">
             <input type="text" v-model="title" placeholder="Buscar producto marcas y mas...">
-            <button type="submit">Search</button>
+            <button type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
         </form>
     </div>
 </template>
@@ -24,7 +26,7 @@ export default {
                     search: this.title
                 }
                 const query = querystring.stringify(data)
-                console.log('query desde el search: '  + query);
+                // console.log('query desde el search: '  + query);
                 window.location = '#/items?' + query;
         }
     }
@@ -37,10 +39,13 @@ export default {
         form {
             display: flex;
             input {
-                width: 100%;
+                width: 95%;
                 font-size: 18px;
                 padding: 5px;
                 border: none;
+            }
+            button i {
+                width: 30px;
             }
         }
     }

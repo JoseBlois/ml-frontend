@@ -45,7 +45,7 @@ export default {
         }
 
         .item-desc {
-            width: 70%;
+            width: 80%;
             margin-left: 10px;
             padding: 10px;
             position: relative;
