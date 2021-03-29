@@ -8,6 +8,7 @@
                 <Search />
             </nav>
         </header>
+        <Cart />
         <main>
             <slot></slot>
         </main>
@@ -16,10 +17,12 @@
 
 <script>
 import Search from './Search';
+import Cart from './Cart';
 export default {
     name: 'Layout',
     components: {
         Search,
+        Cart,
     }
 }
 </script>

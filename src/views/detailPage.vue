@@ -3,13 +3,13 @@
         <div v-if="this.loaded" class="container">
             <div class="title-img-container">
                 <div class="img-container">
-                    <img :src="article.pictures[0].url" :alt="'imangen de ' + this.article.title">
+                    <img :src="this.article.pictures[0].url" :alt="'imangen de ' + this.article.title">
                 </div>
                 <div class="title-container">
                     <span>{{this.article.condition}} - {{this.article.sold_quantity}} Vendidos</span>
                     <h3>{{this.article.title}}</h3>
                     <span class="price">$ {{this.article.price}}</span>
-                    <button class="buy-btn">Comprar</button>
+                    <button @click="actionAdd" class="buy-btn">Comprar</button>
                 </div>
             </div>
             <div class="description-container">
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
 export default {
     name: 'detailPage',
     created() {
@@ -47,6 +48,16 @@ export default {
             article: {},
             description: '',
             loaded: false,
+        }
+    },
+    methods: {
+        ...mapActions(['addProduct']),
+        actionAdd() {
+            this.addProduct({
+                id: this.article.id,
+                title: this.article.title,
+                price: this.article.price,
+            });
         }
     }
 }
@@ -94,6 +105,7 @@ export default {
         }
         .description-container {
             text-align: left;
+            width: 90%;
             h3 {
                 font-size: 24px;
                 font-weight: 700;
