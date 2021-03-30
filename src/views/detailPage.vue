@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div v-if="this.loaded" class="container">
+        <div v-if="!isLoading" class="container">
             <div class="title-img-container">
                 <div class="img-container">
-                    <img :src="this.article.pictures[0].url" :alt="'imangen de ' + this.article.title">
+                    <img :src="selectedItem.pictures[0].url" :alt="'imangen de ' + selectedItem.title">
                 </div>
                 <div class="title-container">
-                    <span>{{this.article.condition}} - {{this.article.sold_quantity}} Vendidos</span>
-                    <h3>{{this.article.title}}</h3>
-                    <span class="price">$ {{this.article.price}}</span>
+                    <span>{{selectedItem.condition}} - {{selectedItem.sold_quantity}} Vendidos</span>
+                    <h3>{{selectedItem.title}}</h3>
+                    <span class="price">$ {{selectedItem.price}}</span>
                     <button @click="actionAdd" class="buy-btn">Comprar</button>
                 </div>
             </div>
@@ -23,10 +23,12 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'detailPage',
+    computed: mapGetters(['selectedItem','isLoading']),
     created() {
+        this.getSelectedItem(this.$route.params.id)
         // console.log(this.$route.params.id);
         axios.get(`https://api.mercadolibre.com/items/${this.$route.params.id}`)
             .then((res) => {
@@ -51,7 +53,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['addProduct']),
+        ...mapActions(['addProduct','getSelectedItem']),
         actionAdd() {
             this.addProduct({
                 id: this.article.id,
