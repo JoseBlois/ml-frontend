@@ -17,7 +17,8 @@ export default {
     props: ['article'],
     methods: {
         redirect () {
-            window.location.href = `#/items/${this.article.id}`
+            // window.location.href = `#/items/${this.article.id}`
+            this.$router.history.push(`/items/${this.article.id}`);
         }
     }
 }

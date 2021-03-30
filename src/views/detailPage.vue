@@ -14,7 +14,7 @@
             </div>
             <div class="description-container">
                 <h3>Descripción del producto</h3>
-                <p>{{this.description}}</p>
+                <p>{{selectedItem.description}}</p>
             </div>
         </div>
         <h1 v-else>Loading...</h1>
@@ -22,28 +22,12 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'detailPage',
     computed: mapGetters(['selectedItem','isLoading']),
     created() {
-        this.getSelectedItem(this.$route.params.id)
-        // console.log(this.$route.params.id);
-        axios.get(`https://api.mercadolibre.com/items/${this.$route.params.id}`)
-            .then((res) => {
-                // console.log(res.data),
-                this.article = res.data;
-                this.loaded = true;
-            })
-            .catch((err) => console.log(err));
-        axios.get(`https://api.mercadolibre.com/items/${this.$route.params.id}/description`)
-            .then((res) => {
-                this.description = res.data.plain_text;
-                // console.log('-- DESCRIPTION RESPONSE --');
-                // console.log(res)
-            })
-            .catch((err) => console.log(err));
+        this.getSelectedItem(this.$route.params.id);
     },
     data() {
         return {
@@ -56,9 +40,9 @@ export default {
         ...mapActions(['addProduct','getSelectedItem']),
         actionAdd() {
             this.addProduct({
-                id: this.article.id,
-                title: this.article.title,
-                price: this.article.price,
+                id: this.selectedItem.id,
+                title: this.selectedItem.title,
+                price: this.selectedItem.price,
             });
         }
     }

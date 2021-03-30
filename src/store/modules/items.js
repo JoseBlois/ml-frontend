@@ -21,7 +21,7 @@ const actions = {
         }
     },
     async getSelectedItem({commit}, id) {
-        console.log(id);
+        // console.log(id);
         const itemRes = await axios.get(`https://api.mercadolibre.com/items/${id}`);
         const descRes = await axios.get(`https://api.mercadolibre.com/items/${id}/description`);
         // console.log('-- ITEMRES --');

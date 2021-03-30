@@ -26,8 +26,9 @@ export default {
                     search: this.title
                 }
                 const query = querystring.stringify(data)
-                // console.log('query desde el search: '  + query);
-                window.location = '#/items?' + query;
+                const newPath = '/items?' + query;
+                this.$router.history.push(newPath);
+                // window.location = '#/items?' + query;
         }
     }
 }

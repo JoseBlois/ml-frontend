@@ -42,8 +42,10 @@ export default {
         ...mapActions(['getItems']),
     },
     created() {
+        console.log('---- search ----')
+        console.log(this.search);
         const data = {
-            search: this.$props.search
+            search: this.search
         }
         const query = querystring.stringify(data)
         const x = query.slice(7);
@@ -58,16 +60,6 @@ export default {
             const query = querystring.stringify(data)
             const x = query.slice(7);
             this.getItems(x)
-            // console.log(`https://api.mercadolibre.com/sites/MLA/search?q=${x}`);
-            // axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${x}`)
-            //     .then((res) => {
-            //         // console.log('-- RES.DATA --');
-            //         // console.log(res.data);
-            //         this.articles = res.data.results.slice(0,4);
-            //         // console.log('-- THIS.ARTICLES --');
-            //         // console.log(this.articles)
-            //     })
-            //     .catch((err) => console.log(err))
         },
     }
 }
